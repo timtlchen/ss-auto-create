@@ -23,8 +23,11 @@ resource "google_compute_instance" "auto-instance" {
   zone = "${var.region_zone}"
 
   boot_disk {
-    image = "${var.boot_disk_img}"
+    initialize_params {
+      image = "${var.boot_disk_img}"
+    }
   }
+  
   network_interface {
     network = "default"
     access_config {
