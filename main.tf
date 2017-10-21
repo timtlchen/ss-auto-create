@@ -55,3 +55,43 @@ resource "google_compute_instance_group" "ss-instance-group" {
 
   zone = "${var.region_zone}"
 }
+
+resource "google_compute_health_check" "ss-health-check" {
+  name = "${var.project_tag}-health-check"
+  tcp_health_check {
+    port = "${var.ss_server_port}"
+  }
+  timeout_sec         = 5
+  check_interval_sec  = 10
+  unhealthy_threshold = 3
+  healthy_threshold   = 2
+}
+
+
+resource "google_compute_forwarding_rule" "ss-forwarding-rule" {
+  name       = "${var.project_tag}-forwarding-rule"
+  // if static ip is used then add this ----  ip_address = 1.1.1.1
+  ip_protocol = "TCP"
+  port_range = "5222-5222"
+  target = "${google_compute_target_tcp_proxy.ss-target-proxy.self_link}"
+}
+
+resource "google_compute_target_tcp_proxy" "ss-target-proxy" {
+  name = "${var.project_tag}-target-proxy"
+  backend_service = "${google_compute_backend_service.ss-backend.self_link}"
+}
+
+
+resource "google_compute_backend_service" "ss-backend" {
+  name        = "${var.project_tag}-backend"
+  port_name   = "ssport"
+  protocol    = "TCP"
+  timeout_sec = 30
+  enable_cdn  = false
+
+  backend {
+    group = "${google_compute_instance_group.ss-instance-group}"
+  }
+
+  health_checks = ["${google_compute_health_check.ss-health-check.self_link}"]
+}
