@@ -49,7 +49,7 @@ resource "google_compute_instance_group" "ss-instance-group" {
   ]
   
    named_port {
-    name = "ss-server-port"
+    name = "ss-server-port",
     port = "${var.ss_server_port}"
   }
 
