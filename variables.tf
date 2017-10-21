@@ -26,6 +26,10 @@ variable "port_range" {
 	description = "Port range for firewall rules"
 }
 
+variable "ss_server_port" {
+	description = "Number of VMs to create"
+}
+
 variable "machine_type" {
 	description = "Machine type. Please choose either f1-micro or g1-small"
 }
@@ -33,3 +37,4 @@ variable "machine_type" {
 variable "instance_count" {
 	description = "Number of VMs to create"
 }
+
