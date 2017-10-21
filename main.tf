@@ -45,7 +45,7 @@ resource "google_compute_instance_group" "auto-instance-group" {
   name        = "${var.project_tag}-instance-group"
 
   instances = [
-    "projects/${var.project_id}/zones/${var.region_zone}/instances/${var.project_tag}-${[count.index]}",
+    "projects/${var.project_id}/zones/${var.region_zone}/instances/${var.project_tag}-${count.index}",
   ]
   
    named_port {
