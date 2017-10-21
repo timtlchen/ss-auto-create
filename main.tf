@@ -22,7 +22,7 @@ resource "google_compute_instance" "auto-instance" {
   machine_type = "${var.machine_type}"
   zone = "${var.region_zone}"
 
-  disk {
+  boot_disk {
     image = "${var.boot_disk_img}"
   }
   network_interface {
