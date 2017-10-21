@@ -45,10 +45,7 @@ resource "google_compute_instance_group" "ss-instance-group" {
   name        = "${var.project_tag}-instance-group"
 
   instances = [
-    "projects/${var.project_id}/zones/${var.region_zone}/instances/${var.project_tag}-0",
-	"projects/${var.project_id}/zones/${var.region_zone}/instances/${var.project_tag}-1",
-	"projects/${var.project_id}/zones/${var.region_zone}/instances/${var.project_tag}-2",
-	"projects/${var.project_id}/zones/${var.region_zone}/instances/${var.project_tag}-3",
+    "${google_compute_instance.ss-instance.*.self_link",
   ]
   
    named_port {
