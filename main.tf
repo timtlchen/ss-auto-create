@@ -45,11 +45,11 @@ resource "google_compute_instance_group" "ss-instance-group" {
   name        = "${var.project_tag}-instance-group"
 
   instances = [
-    "${google_compute_instance.ss-instance.*.self_link",
+    "${google_compute_instance.ss-instance.*.self_link}",
   ]
   
    named_port {
-    name = "ss-server-port",
+    name = "ssport"
     port = "${var.ss_server_port}"
   }
 
