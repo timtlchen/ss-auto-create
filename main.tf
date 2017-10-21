@@ -16,7 +16,7 @@ resource "google_compute_firewall" "${var.project_tag}-firewall-rule" {
 }
 
 
-resource "google_compute_instance" "salt" {
+resource "google_compute_instance" "${var.project_tag}" {
   count = ${var.vm_count}
   name = "${var.project_tag}-${var.vm_count}"
   machine_type = "${var.machine_type}"
