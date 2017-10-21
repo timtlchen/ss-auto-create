@@ -30,3 +30,6 @@ variable "machine_type" {
 	description = "Machine type. Please choose either f1-micro or g1-small"
 }
 
+variable "instance_count" {
+	description = "Number of VMs to create"
+}
