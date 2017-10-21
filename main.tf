@@ -17,7 +17,8 @@ resource "google_compute_firewall" "auto-firewall-rule" {
 
 
 resource "google_compute_instance" "auto-instance" {
-  name = "${var.project_tag}-${var.vm_count.index}"
+  count = ${var.vm_count}
+  name = "${var.project_tag}-${count.index}"
   machine_type = "${var.machine_type}"
   zone = "${var.region_zone}"
 
