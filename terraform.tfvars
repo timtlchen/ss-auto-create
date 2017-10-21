@@ -7,5 +7,6 @@ project_tag = "hackathon-shadowsocks"
 
 boot_disk_img = "shadowsocks-hackathon"
 port_range = "8088-8088"
+ss_server_port = "8088"
 machine_type = "f1-micro"
 instance_count = 2

@@ -35,7 +35,7 @@ resource "google_compute_instance" "auto-instance" {
     }
   }
   service_account {
-    scopes = ["https://www.googleapis.com/auth/compute.readonly"]
+    scopes = ["https://www.googleapis.com/auth/cloud-platform"]
   }
 
 }
@@ -45,8 +45,13 @@ resource "google_compute_instance_group" "auto-instance-group" {
   name        = "${var.project_tag}-instance-group"
 
   instances = [
-    "projects/${var.project_id}/zones/${var.region_zone}/instances/${var.project_tag}-*",
+    "projects/${var.project_id}/zones/${var.region_zone}/instances/${var.project_tag}-${[count.index]}",
   ]
+  
+   named_port {
+    name = "ss-server-port"
+    port = "${var.ss_server_port}"
+  }
 
   zone = "${var.region_zone}"
 }
