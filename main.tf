@@ -68,8 +68,8 @@ resource "google_compute_health_check" "ss-health-check" {
 }
 
 
-resource "google_compute_global_forwarding_rule" "ss-forwarding-rule" {
-  name       = "${var.project_tag}-forwarding-rule"
+resource "google_compute_global_forwarding_rule" "ss-global-forwarding-rule" {
+  name       = "${var.project_tag}-global-forwarding-rule"
   // if static ip is used then add this ----  ip_address = 1.1.1.1
   ip_protocol = "TCP"
   port_range = "5222-5222"
