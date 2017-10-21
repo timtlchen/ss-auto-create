@@ -41,7 +41,7 @@ resource "google_compute_instance" "auto-instance" {
 }
 
 
-resource "google_compute_instance_group_manager" "auto-instance-group" {
+resource "google_compute_instance_group" "auto-instance-group" {
   name        = "${var.project_tag}-instance-group"
 
   instances = [
