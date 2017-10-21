@@ -17,8 +17,8 @@ resource "google_compute_firewall" "${var.project_tag}-firewall-rule" {
 
 
 resource "google_compute_instance" "${var.project_tag}" {
-  count = ${var.vm_count}
-  name = "${var.project_tag}-${var.vm_count}"
+  count = 2
+  name = "${var.project_tag}-${count.index}"
   machine_type = "${var.machine_type}"
   zone = "${var.region_zone}"
 
