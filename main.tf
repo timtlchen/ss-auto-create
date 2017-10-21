@@ -5,7 +5,7 @@ provider "google" {
 }
 
 
-resource "google_compute_firewall" "auto-firewall-rule" {
+resource "google_compute_firewall" "ss-firewall-rule" {
   name    = "${var.project_tag}-allow-port"
   network = "default"
 
@@ -16,7 +16,7 @@ resource "google_compute_firewall" "auto-firewall-rule" {
 }
 
 
-resource "google_compute_instance" "auto-instance" {
+resource "google_compute_instance" "ss-instance" {
   count = "${var.instance_count}"
   name = "${var.project_tag}-${count.index}"
   machine_type = "${var.machine_type}"
@@ -41,11 +41,14 @@ resource "google_compute_instance" "auto-instance" {
 }
 
 
-resource "google_compute_instance_group" "auto-instance-group" {
+resource "google_compute_instance_group" "ss-instance-group" {
   name        = "${var.project_tag}-instance-group"
 
   instances = [
-    "projects/${var.project_id}/zones/${var.region_zone}/instances/${var.project_tag}-${count.index}",
+    "projects/${var.project_id}/zones/${var.region_zone}/instances/${var.project_tag}-0",
+	"projects/${var.project_id}/zones/${var.region_zone}/instances/${var.project_tag}-1",
+	"projects/${var.project_id}/zones/${var.region_zone}/instances/${var.project_tag}-2",
+	"projects/${var.project_id}/zones/${var.region_zone}/instances/${var.project_tag}-3",
   ]
   
    named_port {
