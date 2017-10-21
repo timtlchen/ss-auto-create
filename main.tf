@@ -90,7 +90,7 @@ resource "google_compute_backend_service" "ss-backend" {
   enable_cdn  = false
 
   backend {
-    group = "${google_compute_instance_group.ss-instance-group}}"
+    group = "${google_compute_instance_group.ss-instance-group.name}}"
   }
 
   health_checks = ["${google_compute_health_check.ss-health-check.self_link}"]
