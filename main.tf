@@ -17,8 +17,7 @@ resource "google_compute_firewall" "auto-firewall-rule" {
 
 
 resource "google_compute_instance" "auto-instance" {
-  count = 2
-  name = "${var.project_tag}-${count.index}"
+  name = "${var.project_tag}-${var.vm_count.index}"
   machine_type = "${var.machine_type}"
   zone = "${var.region_zone}"
 
@@ -38,4 +37,15 @@ resource "google_compute_instance" "auto-instance" {
     scopes = ["https://www.googleapis.com/auth/compute.readonly"]
   }
 
+}
+
+
+resource "google_compute_instance_group_manager" "auto-instance-group" {
+  name        = "${var.project_tag}-instance-group"
+
+  instances = [
+    "projects/${var.project_id}/zones/${var.region_zone}/instances/${var.project_tag}-*",
+  ]
+
+  zone = "${var.region_zone}"
 }
