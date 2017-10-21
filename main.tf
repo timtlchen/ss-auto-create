@@ -5,7 +5,7 @@ provider "google" {
 }
 
 
-resource "google_compute_firewall" "${var.project_tag}-firewall-rule" {
+resource "google_compute_firewall" "$auto-firewall-rule" {
   name    = "${var.project_tag}-allow-port"
   network = "default"
 
