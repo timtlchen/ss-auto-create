@@ -62,9 +62,9 @@ resource "google_compute_health_check" "ss-health-check" {
     port = "${var.ss_server_port}"
   }
   timeout_sec         = 5
-  check_interval_sec  = 10
-  unhealthy_threshold = 3
-  healthy_threshold   = 2
+  check_interval_sec  = 5
+  unhealthy_threshold = 2
+  healthy_threshold   = 3
 }
 
 
